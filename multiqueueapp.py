@@ -25,11 +25,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.ui.AddBtn.clicked.connect(self.save)
 
         self.ui.lineEdit.returnPressed.connect(self.save)
+        self.db = QSqlDatabase.addDatabase("QSQLITE")
+        self.db.setDatabaseName("store")
+        self.db.open()
+        self.que = QSqlQuery("CREATE Table priority (id integer, task varchar(256));")
+        if self.que.exec_:
+            print("Executed successful.")
 
-
-
-
-# ToDo add multiple views one for daily list one for a scrum view one for gentt view one for calendar view add tracking
+    # ToDo add multiple views one for daily list one for a scrum view one for gentt view one for calendar view add tracking
 
 
 
@@ -39,7 +42,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         txt = self.ui.lineEdit.text()
         ls = self.ui.comboBox.currentIndex()
         if ls == 0:
-            self.ui.priority.addItem(date + " | " + self.ui.lineEdit.text())
+            text = date + " | " + self.ui.lineEdit.text()
+            self.ui.priority.addItem(text)
+            que = QSqlQuery("Insert into priority task=" + text + ";")
+            if que.exec_:
+                print("Successful")
         elif ls == 1:
             self.ui.noPriority.addItem(date + " | " + self.ui.lineEdit.text())
         elif ls == 2:
@@ -55,11 +62,6 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = MainWindow()
     window.setWindowTitle("Multi Schedule Application")
-    db = QSqlDatabase.addDatabase("QSQLITE")
-    sql = QSqlDatabase.database()
-    que = QSqlQuery("CREATE Table priority (id integer, task varchar(256));")
-    while que.next():
-        print("Executed successful.")
     window.show()
 
 
