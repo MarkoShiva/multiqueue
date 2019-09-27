@@ -32,7 +32,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if self.que.exec_:
             print("Executed successful.")
 
-    # ToDo add multiple views one for daily list one for a scrum view one for gentt view one for calendar view add tracking
+    # ToDo add multiple views one for daily list one for a scrum view one for gantt chart agregated view one for calendar view add tracking
 
 
 
