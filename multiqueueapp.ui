@@ -31,7 +31,7 @@
            <number>-1</number>
           </property>
           <property name="text">
-           <string>Priority</string>
+           <string>Urgent</string>
           </property>
           <property name="textFormat">
            <enum>Qt::AutoText</enum>
@@ -48,14 +48,20 @@
          </widget>
         </item>
         <item>
-         <widget class="QListWidget" name="priority">
+         <widget class="QListWidget" name="urgent">
           <property name="acceptDrops">
            <bool>false</bool>
           </property>
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
           </property>
+          <property name="tabKeyNavigation">
+           <bool>true</bool>
+          </property>
           <property name="dragEnabled">
+           <bool>true</bool>
+          </property>
+          <property name="dragDropOverwriteMode">
            <bool>true</bool>
           </property>
           <property name="dragDropMode">
@@ -76,12 +82,28 @@
         <item>
          <widget class="QLabel" name="label_5">
           <property name="text">
-           <string>less priority</string>
+           <string>Priority</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QListWidget" name="noPriority"/>
+         <widget class="QListWidget" name="priority">
+          <property name="tabKeyNavigation">
+           <bool>true</bool>
+          </property>
+          <property name="dragEnabled">
+           <bool>true</bool>
+          </property>
+          <property name="dragDropOverwriteMode">
+           <bool>true</bool>
+          </property>
+          <property name="dragDropMode">
+           <enum>QAbstractItemView::DragDrop</enum>
+          </property>
+          <property name="defaultDropAction">
+           <enum>Qt::MoveAction</enum>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -95,7 +117,23 @@
          </widget>
         </item>
         <item>
-         <widget class="QListWidget" name="dated"/>
+         <widget class="QListWidget" name="dueDate">
+          <property name="tabKeyNavigation">
+           <bool>true</bool>
+          </property>
+          <property name="dragEnabled">
+           <bool>true</bool>
+          </property>
+          <property name="dragDropOverwriteMode">
+           <bool>true</bool>
+          </property>
+          <property name="dragDropMode">
+           <enum>QAbstractItemView::DragDrop</enum>
+          </property>
+          <property name="defaultDropAction">
+           <enum>Qt::MoveAction</enum>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
