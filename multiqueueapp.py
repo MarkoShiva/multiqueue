@@ -1,13 +1,12 @@
-from builtins import print
+import sys
 
-from PySide2.QtWidgets import QApplication, QMainWindow, QMenu
-import sys, datetime
-from PySide2.QtWidgets import QAction, QListWidgetItem
+from PySide2 import QtCore
+from PySide2.QtSql import QSqlDatabase, QSqlQuery
+from PySide2.QtWidgets import QApplication, QMainWindow
 
 # import uic
 from ui_multiqueueapp import Ui_MainWindow
-from PySide2.QtSql import QSqlDatabase, QSqlQuery
-from PySide2 import QtCore, QtGui
+
 qt_creator_file = "multiqueueapp.ui"
 # Ui_MainWindow, QtBaseClass = uic.loadUiType(qt_creator_file)
 
