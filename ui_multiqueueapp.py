@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'multiqueueapp.ui',
 # licensing of 'multiqueueapp.ui' applies.
 #
-# Created: Mon Sep 30 16:11:43 2019
+# Created: Tue Oct  1 11:55:20 2019
 #      by: pyside2-uic  running on PySide2 5.13.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -35,12 +35,14 @@ class Ui_MainWindow(object):
         self.urgent = QtWidgets.QListWidget(self.centralwidget)
         self.urgent.setAcceptDrops(False)
         self.urgent.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.urgent.setEditTriggers(QtWidgets.QAbstractItemView.AnyKeyPressed|QtWidgets.QAbstractItemView.DoubleClicked|QtWidgets.QAbstractItemView.EditKeyPressed|QtWidgets.QAbstractItemView.SelectedClicked)
         self.urgent.setTabKeyNavigation(True)
         self.urgent.setDragEnabled(True)
         self.urgent.setDragDropOverwriteMode(True)
         self.urgent.setDragDropMode(QtWidgets.QAbstractItemView.DragDrop)
         self.urgent.setDefaultDropAction(QtCore.Qt.MoveAction)
         self.urgent.setAlternatingRowColors(True)
+        self.urgent.setWordWrap(True)
         self.urgent.setObjectName("urgent")
         self.verticalLayout_5.addWidget(self.urgent)
         self.horizontalLayout.addLayout(self.verticalLayout_5)
@@ -50,11 +52,13 @@ class Ui_MainWindow(object):
         self.label_5.setObjectName("label_5")
         self.verticalLayout_6.addWidget(self.label_5)
         self.priority = QtWidgets.QListWidget(self.centralwidget)
+        self.priority.setEditTriggers(QtWidgets.QAbstractItemView.AnyKeyPressed|QtWidgets.QAbstractItemView.DoubleClicked|QtWidgets.QAbstractItemView.EditKeyPressed|QtWidgets.QAbstractItemView.SelectedClicked)
         self.priority.setTabKeyNavigation(True)
         self.priority.setDragEnabled(True)
         self.priority.setDragDropOverwriteMode(True)
         self.priority.setDragDropMode(QtWidgets.QAbstractItemView.DragDrop)
         self.priority.setDefaultDropAction(QtCore.Qt.MoveAction)
+        self.priority.setWordWrap(True)
         self.priority.setObjectName("priority")
         self.verticalLayout_6.addWidget(self.priority)
         self.horizontalLayout.addLayout(self.verticalLayout_6)
@@ -64,11 +68,13 @@ class Ui_MainWindow(object):
         self.label_6.setObjectName("label_6")
         self.verticalLayout_7.addWidget(self.label_6)
         self.dueDate = QtWidgets.QListWidget(self.centralwidget)
+        self.dueDate.setEditTriggers(QtWidgets.QAbstractItemView.AnyKeyPressed|QtWidgets.QAbstractItemView.DoubleClicked|QtWidgets.QAbstractItemView.EditKeyPressed|QtWidgets.QAbstractItemView.SelectedClicked)
         self.dueDate.setTabKeyNavigation(True)
         self.dueDate.setDragEnabled(True)
         self.dueDate.setDragDropOverwriteMode(True)
         self.dueDate.setDragDropMode(QtWidgets.QAbstractItemView.DragDrop)
         self.dueDate.setDefaultDropAction(QtCore.Qt.MoveAction)
+        self.dueDate.setWordWrap(True)
         self.dueDate.setObjectName("dueDate")
         self.verticalLayout_7.addWidget(self.dueDate)
         self.horizontalLayout.addLayout(self.verticalLayout_7)

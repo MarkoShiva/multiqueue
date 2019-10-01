@@ -1,11 +1,13 @@
-from PySide2.QtWidgets import QApplication, QMainWindow
-import sys
-import datetime
+from builtins import print
+
+from PySide2.QtWidgets import QApplication, QMainWindow, QMenu
+import sys, datetime
+from PySide2.QtWidgets import QAction, QListWidgetItem
 
 # import uic
 from ui_multiqueueapp import Ui_MainWindow
 from PySide2.QtSql import QSqlDatabase, QSqlQuery
-from PySide2 import QtCore
+from PySide2 import QtCore, QtGui
 qt_creator_file = "multiqueueapp.ui"
 # Ui_MainWindow, QtBaseClass = uic.loadUiType(qt_creator_file)
 
@@ -23,10 +25,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.ui.dateEdit.setMaximumDate(QtCore.QDate(8181, 12, 31))
 
         self.ui.AddBtn.clicked.connect(self.save)
-
         self.ui.lineEdit.returnPressed.connect(self.save)
         self.db = QSqlDatabase.addDatabase("QSQLITE")
         self.db.setDatabaseName("store")
+        dateMe = QtCore.QDate.currentDate()
         self.db.open()
         self.que = QSqlQuery("CREATE Table urgent (priority integer, "
                              "task varchar(256), date datetime);")
@@ -42,9 +44,34 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             print("Executed successful.")
         self.load()
 
+        self.ui.priority.itemDoubleClicked.connect(self.edit)
+
+
+
+
+
+
+
+
+    def edit(self):
+        # ToDo Add functionality for any widget
+        selectedItems = self.ui.priority.selectedItems()
+        try:
+            for item in selectedItems:
+                item.setSelected(True)
+                item.setFlags(item.flags() | QtCore.Qt.ItemIsEditable)
+                # item.setText(item.text() + " new text")
+                self.ui.priority.editItem(item)
+        except Exception:
+            print("Wrong argument passed and items are not selected.")
+
+
     # ToDo add multiple views one for daily list one for a scrum view one for gantt chart agregated view one for calendar view add tracking
 
 # ToDo rewrite app in MVC mode.
+
+
+# ToDo Refactor the code below so its not repetitive
     def save(self):
         date = self.ui.dateEdit.text()
         # cur = datetime.datetime.now()
@@ -65,6 +92,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         elif ls == 1:
             text = date + " | " + self.ui.lineEdit.text()
             self.ui.priority.addItem(text)
+            # self.ui.priority.setFlags(QListWidgetItem.ItemEditable)
             query = "Insert into priority (priority, task, date) VALUES " \
                     "(1, '" + text + "', datetime('now') " + " );"
             que = QSqlQuery(query)
