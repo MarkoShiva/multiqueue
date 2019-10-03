@@ -123,12 +123,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def addToDatabase(self, lst, txt=""):
         query = "Insert into " + lst + " (priority, task, date) VALUES " \
                                                "(1, '" + txt + "', datetime('now') " + " );"
-        que = QSqlQuery(query)
 
+        que = QSqlQuery(query)
         if que.exec_:
             print("Successful")
             self.db.commit()
-
 
     def load(self):
         query = QSqlQuery()
@@ -147,7 +146,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             print(query.value(0))
             self.ui.dueDate.addItem(query.value(0))
 
-#
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
