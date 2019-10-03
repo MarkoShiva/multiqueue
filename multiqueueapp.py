@@ -101,52 +101,34 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if que.exec_:
             print("Successful")
             self.db.commit()
-
     # ToDo add multiple views one for daily list one for a scrum view one for gantt chart agregated view one for calendar view add tracking
+# Todo Refactor the code below so its not repetitive
 
-# ToDo rewrite app in MVC mode.
 
-
-# ToDo Refactor the code below so its not repetitive
     def save(self):
-        date = self.ui.dateEdit.text()
-        # cur = datetime.datetime.now()
-        txt = self.ui.lineEdit.text()
+        text = self.ui.dateEdit.text() + " | " + self.ui.lineEdit.text()
         ls = self.ui.comboBox.currentIndex()
         if ls == 0:
-            text = date + " | " + self.ui.lineEdit.text()
             self.ui.urgent.addItem(text)
-            query = "Insert into urgent (priority, task, date) VALUES " \
-                    "(1, '" + text + "', datetime('now') " + " );"
-            print(query)
-            que = QSqlQuery(query)
-
-
-            if que.exec_:
-                print("Successful")
-                self.db.commit()
+            self.addToDatabase("urgent", text)
         elif ls == 1:
-            text = date + " | " + self.ui.lineEdit.text()
             self.ui.priority.addItem(text)
-            # self.ui.priority.setFlags(QListWidgetItem.ItemEditable)
-            query = "Insert into priority (priority, task, date) VALUES " \
-                    "(1, '" + text + "', datetime('now') " + " );"
-            que = QSqlQuery(query)
-            if que.exec_:
-                print("Successful")
-                self.db.commit()
+            self.addToDatabase("priority", text)
         elif ls == 2:
-            text = date + " | " + self.ui.lineEdit.text()
             self.ui.dueDate.addItem(text)
-            query = "Insert into dueDate (priority, task, date) VALUES " \
-                    "(1, '" + text + "', datetime('now') " + " );"
-            que = QSqlQuery(query)
-            if que.exec_:
-                print("Successful")
-                self.db.commit()
-        else:
-            pass
+            self.addToDatabase("dueDate", text)
+
         self.ui.lineEdit.clear()
+
+    def addToDatabase(self, lst, txt=""):
+        query = "Insert into " + lst + " (priority, task, date) VALUES " \
+                                               "(1, '" + txt + "', datetime('now') " + " );"
+        que = QSqlQuery(query)
+
+        if que.exec_:
+            print("Successful")
+            self.db.commit()
+
 
     def load(self):
         query = QSqlQuery()
