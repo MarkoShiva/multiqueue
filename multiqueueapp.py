@@ -59,8 +59,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             item.setSelected(True)
             item.setFlags(item.flags() | QtCore.Qt.ItemIsEditable)
             self.ui.priority.editItem(item)
-            curText = item.text()
-            print(curText)
 
 
 
@@ -90,6 +88,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             item.setSelected(True)
             item.setFlags(item.flags() | QtCore.Qt.ItemIsEditable)
             self.ui.dueDate.editItem(item)
+
+
 
 
 
