@@ -1,6 +1,7 @@
 import sys
 
 from PySide2 import QtCore
+from PySide2.QtCore import QObject, Signal, Slot
 from PySide2.QtSql import QSqlDatabase, QSqlQuery
 from PySide2.QtWidgets import QApplication, QMainWindow
 
@@ -42,28 +43,64 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if self.que.exec_:
             print("Executed successful.")
         self.load()
-
-        self.ui.priority.itemDoubleClicked.connect(self.edit)
-
-
-
-
+        self.ui.priority.itemDoubleClicked.connect(self.editPriority)
+        self.ui.urgent.itemDoubleClicked.connect(self.editUrgent)
+        self.ui.dueDate.itemDoubleClicked.connect(self.editDueDate)
+        # self.ui.priority.
 
 
 
 
-    def edit(self):
-        # ToDo Add functionality for any widget
+
+
+    def editPriority(self):
         selectedItems = self.ui.priority.selectedItems()
-        try:
-            for item in selectedItems:
-                item.setSelected(True)
-                item.setFlags(item.flags() | QtCore.Qt.ItemIsEditable)
-                # item.setText(item.text() + " new text")
-                self.ui.priority.editItem(item)
-        except Exception:
-            print("Wrong argument passed and items are not selected.")
+        for item in selectedItems:
+            item.setSelected(True)
+            item.setFlags(item.flags() | QtCore.Qt.ItemIsEditable)
+            self.ui.priority.editItem(item)
+            curText = item.text()
+            print(curText)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    def editUrgent(self):
+        selectedItems = self.ui.urgent.selectedItems()
+        for item in selectedItems:
+            item.setSelected(True)
+            item.setFlags(item.flags() | QtCore.Qt.ItemIsEditable)
+            self.ui.urgent.editItem(item)
+
+
+
+    def editDueDate(self):
+        selectedItems = self.ui.dueDate.selectedItems()
+        for item in selectedItems:
+            item.setSelected(True)
+            item.setFlags(item.flags() | QtCore.Qt.ItemIsEditable)
+            self.ui.dueDate.editItem(item)
+
+
+
+    def saveEdited(self, text):
+        query = "UPDATE urgent set priority = 1, task = '" + text \
+                + "', date = datetime('now')" + " );"
+        print(query)
+        que = QSqlQuery(query)
+        if que.exec_:
+            print("Successful")
+            self.db.commit()
 
     # ToDo add multiple views one for daily list one for a scrum view one for gantt chart agregated view one for calendar view add tracking
 
