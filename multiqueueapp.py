@@ -81,7 +81,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.ui.urgent.editItem(item)
 
 
-
     def editDueDate(self):
         selectedItems = self.ui.dueDate.selectedItems()
         for item in selectedItems:
