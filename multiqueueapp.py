@@ -9,6 +9,8 @@ from PySide2.QtWidgets import QApplication, QMainWindow
 from ui_multiqueueapp import Ui_MainWindow
 
 qt_creator_file = "multiqueueapp.ui"
+
+
 # Ui_MainWindow, QtBaseClass = uic.loadUiType(qt_creator_file)
 
 
@@ -42,16 +44,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                              "task varchar(256), date datetime);")
         if self.que.exec_:
             print("Executed successful.")
-        self.load()
+        self.load("priority")
+        self.load("urgent")
+        self.load("dueDate")
         self.ui.priority.itemDoubleClicked.connect(self.editPriority)
         self.ui.urgent.itemDoubleClicked.connect(self.editUrgent)
         self.ui.dueDate.itemDoubleClicked.connect(self.editDueDate)
         # self.ui.priority.
-
-
-
-
-
 
     def editPriority(self):
         selectedItems = self.ui.priority.selectedItems()
@@ -60,19 +59,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             item.setFlags(item.flags() | QtCore.Qt.ItemIsEditable)
             self.ui.priority.editItem(item)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     def editUrgent(self):
         selectedItems = self.ui.urgent.selectedItems()
         for item in selectedItems:
@@ -80,18 +66,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             item.setFlags(item.flags() | QtCore.Qt.ItemIsEditable)
             self.ui.urgent.editItem(item)
 
-
-
     def editDueDate(self):
         selectedItems = self.ui.dueDate.selectedItems()
         for item in selectedItems:
             item.setSelected(True)
             item.setFlags(item.flags() | QtCore.Qt.ItemIsEditable)
             self.ui.dueDate.editItem(item)
-
-
-
-
 
     def saveEdited(self, text):
         query = "UPDATE urgent set priority = 1, task = '" + text \
@@ -101,9 +81,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if que.exec_:
             print("Successful")
             self.db.commit()
-    # ToDo add multiple views one for daily list one for a scrum view one for gantt chart agregated view one for calendar view add tracking
-# Todo Refactor the code below so its not repetitive
 
+    # ToDo add multiple views one for daily list one for a scrum view one for gantt chart aggregated
+    # view one for calendar view add tracking
+    # Todo Refactor the code below so its not repetitive
 
     def save(self):
         text = self.ui.dateEdit.text() + " | " + self.ui.lineEdit.text()
@@ -117,35 +98,27 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         elif ls == 2:
             self.ui.dueDate.addItem(text)
             self.addToDatabase("dueDate", text)
-
         self.ui.lineEdit.clear()
 
     def addToDatabase(self, lst, txt=""):
         query = "Insert into " + lst + " (priority, task, date) VALUES " \
-                                               "(1, '" + txt + "', datetime('now') " + " );"
-
+                                       "(1, '" + txt + "', datetime('now') " + " );"
         que = QSqlQuery(query)
         if que.exec_:
             print("Successful")
             self.db.commit()
 
-    def load(self):
+    def load(self, lst):
         query = QSqlQuery()
-        query.exec_("SELECT task from priority;")
+        query.exec_("SELECT task from " + lst + ";")
         while query.next():
             print(query.value(0))
-            self.ui.priority.addItem(query.value(0))
-        query = QSqlQuery()
-        query.exec_("SELECT task from urgent;")
-        while query.next():
-            print(query.value(0))
-            self.ui.urgent.addItem(query.value(0))
-        query = QSqlQuery()
-        query.exec_("SELECT task from dueDate;")
-        while query.next():
-            print(query.value(0))
-            self.ui.dueDate.addItem(query.value(0))
-
+            if lst == "priority":
+                self.ui.priority.addItem(query.value(0))
+            elif lst == "urgent":
+                self.ui.urgent.addItem(query.value(0))
+            elif lst == "dueDate":
+                self.ui.dueDate.addItem(query.value(0))
 
 
 if __name__ == "__main__":
@@ -153,6 +126,5 @@ if __name__ == "__main__":
     window = MainWindow()
     window.setWindowTitle("Multi Schedule Application")
     window.show()
-
 
     sys.exit(app.exec_())

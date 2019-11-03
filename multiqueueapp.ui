@@ -338,8 +338,15 @@
     </property>
     <addaction name="actionAbout_Program"/>
    </widget>
+   <widget class="QMenu" name="menuGantt">
+    <property name="title">
+     <string>Gantt</string>
+    </property>
+    <addaction name="actionOpen_gantt_view"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
+   <addaction name="menuGantt"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -379,6 +386,11 @@
    </property>
    <property name="text">
     <string>About Program</string>
+   </property>
+  </action>
+  <action name="actionOpen_gantt_view">
+   <property name="text">
+    <string>Open gantt view</string>
    </property>
   </action>
  </widget>

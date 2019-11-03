@@ -129,3 +129,4 @@ store
 
 
 multiqueueapp_test.py
+*.sqlite
