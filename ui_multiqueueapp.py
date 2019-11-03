@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'multiqueueapp.ui',
 # licensing of 'multiqueueapp.ui' applies.
 #
-# Created: Tue Oct  1 11:55:20 2019
+# Created: Sun Nov  3 11:35:38 2019
 #      by: pyside2-uic  running on PySide2 5.13.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -35,7 +35,7 @@ class Ui_MainWindow(object):
         self.urgent = QtWidgets.QListWidget(self.centralwidget)
         self.urgent.setAcceptDrops(False)
         self.urgent.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.urgent.setEditTriggers(QtWidgets.QAbstractItemView.AnyKeyPressed|QtWidgets.QAbstractItemView.DoubleClicked|QtWidgets.QAbstractItemView.EditKeyPressed|QtWidgets.QAbstractItemView.SelectedClicked)
+        self.urgent.setEditTriggers(QtWidgets.QAbstractItemView.DoubleClicked|QtWidgets.QAbstractItemView.EditKeyPressed)
         self.urgent.setTabKeyNavigation(True)
         self.urgent.setDragEnabled(True)
         self.urgent.setDragDropOverwriteMode(True)
@@ -52,7 +52,7 @@ class Ui_MainWindow(object):
         self.label_5.setObjectName("label_5")
         self.verticalLayout_6.addWidget(self.label_5)
         self.priority = QtWidgets.QListWidget(self.centralwidget)
-        self.priority.setEditTriggers(QtWidgets.QAbstractItemView.AnyKeyPressed|QtWidgets.QAbstractItemView.DoubleClicked|QtWidgets.QAbstractItemView.EditKeyPressed|QtWidgets.QAbstractItemView.SelectedClicked)
+        self.priority.setEditTriggers(QtWidgets.QAbstractItemView.DoubleClicked|QtWidgets.QAbstractItemView.EditKeyPressed)
         self.priority.setTabKeyNavigation(True)
         self.priority.setDragEnabled(True)
         self.priority.setDragDropOverwriteMode(True)
@@ -68,7 +68,7 @@ class Ui_MainWindow(object):
         self.label_6.setObjectName("label_6")
         self.verticalLayout_7.addWidget(self.label_6)
         self.dueDate = QtWidgets.QListWidget(self.centralwidget)
-        self.dueDate.setEditTriggers(QtWidgets.QAbstractItemView.AnyKeyPressed|QtWidgets.QAbstractItemView.DoubleClicked|QtWidgets.QAbstractItemView.EditKeyPressed|QtWidgets.QAbstractItemView.SelectedClicked)
+        self.dueDate.setEditTriggers(QtWidgets.QAbstractItemView.DoubleClicked|QtWidgets.QAbstractItemView.EditKeyPressed)
         self.dueDate.setTabKeyNavigation(True)
         self.dueDate.setDragEnabled(True)
         self.dueDate.setDragDropOverwriteMode(True)
@@ -150,6 +150,8 @@ class Ui_MainWindow(object):
         self.menuEdit.setObjectName("menuEdit")
         self.menuHelp = QtWidgets.QMenu(self.menubar)
         self.menuHelp.setObjectName("menuHelp")
+        self.menuGantt = QtWidgets.QMenu(self.menubar)
+        self.menuGantt.setObjectName("menuGantt")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -169,6 +171,8 @@ class Ui_MainWindow(object):
         self.actionAbout_Program = QtWidgets.QAction(MainWindow)
         self.actionAbout_Program.setCheckable(False)
         self.actionAbout_Program.setObjectName("actionAbout_Program")
+        self.actionOpen_gantt_view = QtWidgets.QAction(MainWindow)
+        self.actionOpen_gantt_view.setObjectName("actionOpen_gantt_view")
         self.menuFile.addAction(self.actionOpen)
         self.menuFile.addAction(self.actionSave)
         self.menuFile.addSeparator()
@@ -177,8 +181,10 @@ class Ui_MainWindow(object):
         self.menuEdit.addAction(self.actionCut)
         self.menuEdit.addAction(self.actionPaste)
         self.menuHelp.addAction(self.actionAbout_Program)
+        self.menuGantt.addAction(self.actionOpen_gantt_view)
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuEdit.menuAction())
+        self.menubar.addAction(self.menuGantt.menuAction())
         self.menubar.addAction(self.menuHelp.menuAction())
 
         self.retranslateUi(MainWindow)
@@ -203,6 +209,7 @@ class Ui_MainWindow(object):
         self.menuFile.setTitle(QtWidgets.QApplication.translate("MainWindow", "File", None, -1))
         self.menuEdit.setTitle(QtWidgets.QApplication.translate("MainWindow", "Edit", None, -1))
         self.menuHelp.setTitle(QtWidgets.QApplication.translate("MainWindow", "Help", None, -1))
+        self.menuGantt.setTitle(QtWidgets.QApplication.translate("MainWindow", "Gantt", None, -1))
         self.actionOpen.setText(QtWidgets.QApplication.translate("MainWindow", "Open", None, -1))
         self.actionSave.setText(QtWidgets.QApplication.translate("MainWindow", "Save", None, -1))
         self.actionExit.setText(QtWidgets.QApplication.translate("MainWindow", "Exit", None, -1))
@@ -210,4 +217,5 @@ class Ui_MainWindow(object):
         self.actionCut.setText(QtWidgets.QApplication.translate("MainWindow", "Cut", None, -1))
         self.actionPaste.setText(QtWidgets.QApplication.translate("MainWindow", "Paste", None, -1))
         self.actionAbout_Program.setText(QtWidgets.QApplication.translate("MainWindow", "About Program", None, -1))
+        self.actionOpen_gantt_view.setText(QtWidgets.QApplication.translate("MainWindow", "Open gantt view", None, -1))
 
