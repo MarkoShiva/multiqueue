@@ -134,3 +134,4 @@ sonar-project.properties
 multiqueueapp_test.py
 *.sqlite
 codealike.json
+*.db
