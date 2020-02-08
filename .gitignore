@@ -126,6 +126,9 @@ dmypy.json
 .pyre/
 .idea/
 store
+.scannerwork/
+howtos.md
+sonar-project.properties
 
 
 multiqueueapp_test.py
